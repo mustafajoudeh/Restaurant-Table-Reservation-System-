@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f7f7f2" />
+    <meta
+      name="description"
+      content="Choose your table and reserve your next visit to Summit Terrace."
+    />
+    <title>Summit Terrace | Reserve a table</title>
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <script defer src="assets/js/config.js"></script>
+    <script defer src="assets/js/api.js"></script>
+    <script defer src="assets/js/auth.js"></script>
+    <script defer src="assets/js/auth-nav.js"></script>
+    <script defer src="assets/js/home.js"></script>
+  </head>
+  <body class="public-page">
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="index.html" aria-label="Summit Terrace home">
+          <span class="brand-mark" aria-hidden="true">S</span>
+          <span class="brand-copy">
+            <span class="brand-name">Summit Terrace</span>
+            <span class="brand-sub">Mountain-view dining</span>
+          </span>
+        </a>
+
+        <nav class="site-nav" id="mainNav" aria-label="Main navigation">
+          <a class="active" href="index.html">Home</a>
+          <a href="reservation.html">Reserve a table</a>
+          <a href="#how-it-works">How it works</a>
+        </nav>
+
+        <div class="header-actions">
+          <a class="nav-signin" href="login.html">Sign in</a>
+          <a class="btn btn-primary" href="reservation.html">
+            Book a table <span aria-hidden="true">↗</span>
+          </a>
+          <button
+            class="mobile-toggle"
+            id="mobileToggle"
+            type="button"
+            aria-label="Open navigation menu"
+            aria-expanded="false"
+          >
+            ☰
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="home-hero">
+        <div class="container hero-layout">
+          <div class="hero-copy">
+            <span class="eyebrow">
+              <span class="eyebrow-dot"></span>
+              A mountain-view dining experience
+            </span>
+
+            <h1>A good meal.<br /><span>A better view.</span></h1>
+
+            <p>
+              Choose your table, pick a time, and leave the details to us. Your
+              next great evening is only a few simple steps away.
+            </p>
+
+            <div class="hero-actions">
+              <a class="btn btn-primary btn-large" href="reservation.html">
+                Reserve your table <span aria-hidden="true">→</span>
+              </a>
+              <a class="quiet-link" href="#how-it-works">See how it works</a>
+            </div>
+
+            <div class="hero-points" aria-label="Reservation benefits">
+              <span><span class="check-dot">✓</span> Choose your table</span>
+              <span><span class="check-dot">✓</span> Clear pricing</span>
+              <span
+                ><span class="check-dot">✓</span> No account needed to
+                book</span
+              >
+            </div>
+          </div>
+
+          <div
+            class="hero-photo"
+            role="img"
+            aria-label="Illustrated mountains and a quiet terrace at sunset"
+          >
+            <div class="scene-sun"></div>
+            <div class="scene-mountain scene-mountain-back"></div>
+            <div class="scene-mountain scene-mountain-front"></div>
+            <div class="scene-terrace"></div>
+
+            <div class="photo-caption">
+              <span class="caption-icon" aria-hidden="true">⌖</span>
+              <span>
+                <strong>Your seat, your view</strong>
+                <small>Pick the table that feels right.</small>
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="simple-process" id="how-it-works">
+        <div class="container">
+          <div class="section-heading">
+            <div>
+              <span class="eyebrow">A simpler way to reserve</span>
+              <h2>Three steps. That's it.</h2>
+            </div>
+            <a class="quiet-link" href="reservation.html">
+              Start booking <span aria-hidden="true">→</span>
+            </a>
+          </div>
+
+          <div class="process-grid">
+            <article class="process-item">
+              <span class="process-number">01</span>
+              <div>
+                <h3>Choose a date</h3>
+                <p>
+                  Tell us when you’re coming and how many people are joining.
+                </p>
+              </div>
+            </article>
+
+            <article class="process-item">
+              <span class="process-number">02</span>
+              <div>
+                <h3>Pick a table</h3>
+                <p>
+                  Compare capacity, reservation fee, and deposit before you
+                  choose.
+                </p>
+              </div>
+            </article>
+
+            <article class="process-item">
+              <span class="process-number">03</span>
+              <div>
+                <h3>Confirm your booking</h3>
+                <p>Guests verify their email. Members can book directly.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="home-cta">
+        <div class="container cta-inner">
+          <div>
+            <span class="eyebrow">Your next evening starts here</span>
+            <h2>Find your table.</h2>
+            <p>Simple booking, with the details clear before you confirm.</p>
+          </div>
+          <a class="btn btn-light btn-large" href="reservation.html">
+            Start a reservation <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <a class="brand footer-brand" href="index.html">
+          <span class="brand-mark" aria-hidden="true">S</span>
+          <span class="brand-copy">
+            <span class="brand-name">Summit Terrace</span>
+            <span class="brand-sub">Mountain-view dining</span>
+          </span>
+        </a>
+
+        <span>© <span id="year"></span> Summit Terrace</span>
+
+        <div class="footer-links">
+          <a href="reservation.html">Reserve</a>
+          <a href="login.html">Sign in</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

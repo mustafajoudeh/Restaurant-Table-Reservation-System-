@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#526044" />
+    <meta
+      name="description"
+      content="Review Summit Terrace deposit and refund records."
+    />
+    <title>Payments | Summit Terrace</title>
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+    <script defer src="../assets/js/config.js"></script>
+    <script defer src="../assets/js/api.js"></script>
+    <script defer src="../assets/js/admin.js"></script>
+  </head>
+  <body>
+    <div class="admin-shell">
+      <aside class="admin-sidebar" id="adminSidebar"></aside>
+      <main class="admin-main">
+        <header class="admin-top">
+          <span class="admin-top-title">Payments</span>
+          <div class="admin-user">
+            <span>Restaurant administrator</span
+            ><span class="avatar" aria-hidden="true">A</span>
+          </div>
+        </header>
+
+        <section class="admin-content">
+          <div class="admin-page-heading">
+            <div>
+              <div class="eyebrow">Transactions</div>
+              <h1>Payment management</h1>
+              <p>
+                Review deposits and refunds, check their status, and record
+                completed cash or refund actions.
+              </p>
+            </div>
+            <button
+              class="btn btn-outline btn-small"
+              id="refreshAdmin"
+              type="button"
+            >
+              ↻ Refresh
+            </button>
+          </div>
+
+          <div
+            class="admin-alert"
+            id="adminAlert"
+            role="status"
+            aria-live="polite"
+          ></div>
+
+          <section class="panel">
+            <div class="panel-pad">
+              <div
+                class="data-table-wrap"
+                id="paymentsTable"
+                aria-live="polite"
+              >
+                <div class="loading">Loading payments…</div>
+              </div>
+            </div>
+          </section>
+
+          <div class="api-hint" style="margin-top: 16px">
+            Confirm cash deposits only after receiving the payment. Mark refunds
+            complete only after the refund has been processed. Online payment
+            demonstrations do not charge real money.
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

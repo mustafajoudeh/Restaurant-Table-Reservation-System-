@@ -1,0 +1,10 @@
+RewriteEngine On
+
+# Let Apache serve existing files and directories normally.
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Send other API routes to index.php.
+
+RewriteRule ^ index.php [QSA,L]

@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f7f7f2" />
+    <title>Reserve a table | Summit Terrace</title>
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <script defer src="assets/js/config.js"></script>
+    <script defer src="assets/js/api.js"></script>
+    <script defer src="assets/js/auth.js"></script>
+    <script defer src="assets/js/auth-nav.js"></script>
+    <script defer src="assets/js/reservation.js"></script>
+  </head>
+
+  <body class="public-page">
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="index.html" aria-label="Summit Terrace home">
+          <span class="brand-mark" aria-hidden="true">S</span>
+          <span class="brand-copy">
+            <span class="brand-name">Summit Terrace</span>
+            <span class="brand-sub">Mountain-view dining</span>
+          </span>
+        </a>
+
+        <nav class="site-nav" id="mainNav" aria-label="Main navigation">
+          <a href="index.html">Home</a>
+          <a class="active" href="reservation.html">Reserve a table</a>
+        </nav>
+
+        <div class="header-actions">
+          <a class="nav-signin" href="login.html">Sign in</a>
+          <a class="btn btn-primary" href="reservation.html"
+            >Your reservation</a
+          >
+          <button
+            class="mobile-toggle"
+            id="mobileToggle"
+            type="button"
+            aria-label="Open navigation menu"
+            aria-expanded="false"
+          >
+            ☰
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="container reservation-page">
+      <div class="reservation-intro">
+        <div>
+          <span class="eyebrow">Reservations</span>
+          <h1>Book your table.</h1>
+          <p>
+            Choose a time and table, review the price, then confirm. It’s that
+            simple.
+          </p>
+        </div>
+        <a class="back-link" href="index.html">← Back home</a>
+      </div>
+
+      <div class="reservation-steps" aria-label="Reservation steps">
+        <span class="reservation-step active" id="stepChoose">
+          <b>1</b> Choose
+        </span>
+        <span class="step-line"></span>
+        <span class="reservation-step" id="stepDetails">
+          <b>2</b> Your details
+        </span>
+        <span class="step-line" id="stepLineVerification"></span>
+        <span class="reservation-step" id="stepVerification">
+          <b>3</b> Verify email
+        </span>
+        <span class="step-line"></span>
+        <span class="reservation-step" id="stepConfirm">
+          <b>4</b> Confirm
+        </span>
+      </div>
+
+      <section class="reservation-layout">
+        <div class="reservation-main-column">
+          <!-- Reservation date, time, and group size -->
+          <section class="panel booking-options">
+            <div class="panel-heading">
+              <span class="section-number">1</span>
+              <div>
+                <h2>When are you visiting?</h2>
+                <p>Choose your date, time, and party size.</p>
+              </div>
+            </div>
+
+            <div class="booking-fields">
+              <div class="field">
+                <label for="date">Date</label>
+                <input id="date" type="date" required />
+              </div>
+
+              <div class="field">
+                <label for="time">Start time</label>
+                <select id="time">
+                  <option value="17:00">5:00 PM</option>
+                  <option value="18:00">6:00 PM</option>
+                  <option value="19:00" selected>7:00 PM</option>
+                  <option value="20:00">8:00 PM</option>
+                  <option value="21:00">9:00 PM</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="guests">Adults</label>
+                <select id="guests">
+                  <option value="1">1 adult</option>
+                  <option value="2" selected>2 adults</option>
+                  <option value="3">3 adults</option>
+                  <option value="4">4 adults</option>
+                  <option value="5">5 adults</option>
+                  <option value="6">6 adults</option>
+                  <option value="7">7 adults</option>
+                  <option value="8">8 adults</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="children">Children</label>
+                <select id="children">
+                  <option value="0" selected>0 children</option>
+                  <option value="1">1 child</option>
+                  <option value="2">2 children</option>
+                  <option value="3">3 children</option>
+                  <option value="4">4 children</option>
+                  <option value="5">5 children</option>
+                </select>
+              </div>
+            </div>
+          </section>
+
+          <!-- Available tables -->
+          <section class="panel table-picker">
+            <div class="panel-heading table-picker-heading">
+              <span class="section-number">2</span>
+              <div>
+                <h2>Choose your table</h2>
+                <p>
+                  Compare seating, reservation fees, and deposits before
+                  choosing.
+                </p>
+              </div>
+              <span class="count-label" id="tableCount">Loading…</span>
+            </div>
+
+            <div
+              class="table-grid"
+              id="floorGrid"
+              aria-label="Tables available to select"
+              aria-live="polite"
+            >
+              <div class="loading">Finding tables for your visit…</div>
+            </div>
+
+            <div
+              class="notice"
+              id="tablesError"
+              role="alert"
+              aria-live="assertive"
+            ></div>
+
+            <p class="small-note">
+              Table availability can change as reservations come in. We’ll check
+              availability again when you confirm your booking.
+            </p>
+          </section>
+
+          <!-- Guest or account booking details -->
+          <section class="panel guest-panel" id="guestPanel" hidden>
+            <div class="panel-heading">
+              <span class="section-number">3</span>
+              <div>
+                <h2 id="guestPanelTitle">Your details</h2>
+                <p id="guestIntro">
+                  Booking without an account? Enter your details and verify your
+                  email to continue.
+                </p>
+              </div>
+              <span class="count-label" id="verificationBadge"
+                >Email verification</span
+              >
+            </div>
+
+            <form id="guestForm" novalidate>
+              <div class="guest-fields">
+                <div class="field" id="guestNameField">
+                  <label for="guestName">Full name</label>
+                  <input
+                    id="guestName"
+                    name="guestName"
+                    autocomplete="name"
+                    maxlength="150"
+                    placeholder="Your full name"
+                    required
+                  />
+                </div>
+
+                <div class="field" id="guestEmailField">
+                  <label for="guestEmail">Email address</label>
+                  <input
+                    id="guestEmail"
+                    name="guestEmail"
+                    type="email"
+                    autocomplete="email"
+                    placeholder="you@example.com"
+                    required
+                  />
+                  <button
+                    class="text-link change-email"
+                    type="button"
+                    id="changeEmailButton"
+                    hidden
+                  >
+                    Change email
+                  </button>
+                </div>
+
+                <div class="field" id="guestPhoneField">
+                  <label for="guestPhone">
+                    Phone <span class="optional-label">Optional</span>
+                  </label>
+                  <input
+                    id="guestPhone"
+                    name="guestPhone"
+                    type="tel"
+                    autocomplete="tel"
+                    maxlength="30"
+                    placeholder="Phone number"
+                  />
+                </div>
+
+                <div class="field" id="otpCodeField">
+                  <label for="otpCode">6-digit verification code</label>
+                  <input
+                    id="otpCode"
+                    name="otpCode"
+                    inputmode="numeric"
+                    pattern="[0-9]{6}"
+                    maxlength="6"
+                    placeholder="Enter code"
+                    disabled
+                  />
+                </div>
+              </div>
+
+              <div class="form-actions" id="guestActions">
+                <button
+                  class="btn btn-secondary"
+                  type="button"
+                  id="sendOtpButton"
+                >
+                  Send verification code
+                </button>
+
+                <button
+                  class="btn btn-secondary"
+                  type="button"
+                  id="verifyOtpButton"
+                  disabled
+                >
+                  Verify email
+                </button>
+
+                <button
+                  class="btn btn-primary"
+                  type="submit"
+                  id="createBookingButton"
+                  disabled
+                >
+                  Confirm booking
+                </button>
+              </div>
+
+              <div
+                class="notice"
+                id="bookingNotice"
+                role="status"
+                aria-live="polite"
+              ></div>
+            </form>
+          </section>
+
+          <!-- Reservation confirmation and deposit options -->
+          <section class="panel confirmation-panel" id="successPanel" hidden>
+            <div class="success-mark" aria-hidden="true">✓</div>
+
+            <span class="eyebrow">Reservation request received</span>
+            <h2>You’re all set.</h2>
+            <p>
+              Your reservation request has been received. Please keep your
+              booking reference for your records.
+            </p>
+
+            <div id="successDetails" class="success-details"></div>
+
+            <section class="payment-card" id="paymentPanel" hidden>
+              <h3>Deposit payment</h3>
+              <p>
+                Choose how you would like to handle the deposit. Online payment
+                is a demonstration only; no money will be charged.
+              </p>
+
+              <div class="field">
+                <label for="paymentMethod"
+                  >How would you like to pay the deposit?</label
+                >
+                <select id="paymentMethod">
+                  <option value="Cash">Pay at the restaurant</option>
+                  <option value="Online">Online payment demo</option>
+                </select>
+              </div>
+
+              <button
+                type="button"
+                class="btn btn-primary"
+                id="createPaymentButton"
+              >
+                Continue to deposit
+              </button>
+
+              <div
+                class="notice"
+                id="paymentNotice"
+                role="status"
+                aria-live="polite"
+              ></div>
+
+              <div
+                id="onlineSimulationControls"
+                hidden
+                class="simulation-controls"
+              >
+                <div class="small-note">
+                  This is a demo only. No money will be charged.
+                </div>
+
+                <div class="field">
+                  <label for="onlineResult">Choose a demo outcome</label>
+                  <select id="onlineResult">
+                    <option value="success">Successful demo payment</option>
+                    <option value="failure">Unsuccessful demo payment</option>
+                  </select>
+                </div>
+
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  id="simulateOnlineButton"
+                >
+                  Run demo payment
+                </button>
+              </div>
+            </section>
+
+            <a
+              href="reservation.html"
+              class="btn btn-primary"
+              style="margin-top: 18px"
+              >Make another reservation</a
+            >
+          </section>
+        </div>
+
+        <!-- Summary -->
+        <aside class="reservation-summary" aria-label="Reservation summary">
+          <section class="panel summary-card">
+            <div class="summary-heading">
+              <div>
+                <span class="eyebrow">Your reservation</span>
+                <h2>Summary</h2>
+              </div>
+              <span class="summary-clock" aria-hidden="true">◷</span>
+            </div>
+
+            <div class="summary-row">
+              <span>Date &amp; time</span>
+              <strong id="summaryTime">Choose a date</strong>
+            </div>
+
+            <div class="summary-row">
+              <span>Party size</span>
+              <strong id="summaryGuests">2 adults · 0 children</strong>
+            </div>
+
+            <div class="summary-row">
+              <span>Selected table</span>
+              <strong id="summaryTable">Choose a table</strong>
+            </div>
+
+            <div class="selected-table-summary">
+              <span class="eyebrow" id="tableRef">No table selected</span>
+              <h3 id="tableName">Choose a table</h3>
+              <p id="tableDescription">Select a table to see its details.</p>
+              <span id="tableViewLabel" hidden></span>
+            </div>
+
+            <div class="summary-divider"></div>
+
+            <div class="summary-row">
+              <span>Reservation fee</span>
+              <strong id="bookingPrice">—</strong>
+            </div>
+
+            <div class="summary-row">
+              <span>Required deposit</span>
+              <strong id="depositPrice">—</strong>
+            </div>
+
+            <div class="summary-row">
+              <span>Availability</span>
+              <strong id="tableStatus">—</strong>
+            </div>
+
+            <div class="summary-total">
+              <span>Total reservation fee</span>
+              <strong id="totalPrice">—</strong>
+            </div>
+
+            <div class="notice info" id="availabilityNote">
+              Choose a table to review its price and seating. We’ll check
+              availability when you confirm.
+            </div>
+
+            <button
+              type="button"
+              class="btn btn-primary btn-full"
+              id="continueButton"
+              disabled
+            >
+              Continue <span aria-hidden="true">→</span>
+            </button>
+
+            <p class="summary-footnote">
+              You won’t be charged before choosing your deposit option.
+            </p>
+          </section>
+        </aside>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <a class="brand footer-brand" href="index.html">
+          <span class="brand-mark" aria-hidden="true">S</span>
+          <span class="brand-copy">
+            <span class="brand-name">Summit Terrace</span>
+            <span class="brand-sub">Mountain-view dining</span>
+          </span>
+        </a>
+
+        <span>© <span id="year"></span> Summit Terrace</span>
+        <a class="footer-back" href="index.html">Back home</a>
+      </div>
+    </footer>
+  </body>
+</html>

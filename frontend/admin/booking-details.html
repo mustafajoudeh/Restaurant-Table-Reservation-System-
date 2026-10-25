@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#526044" />
+    <meta
+      name="description"
+      content="Review and update a Summit Terrace reservation."
+    />
+    <title>Reservation details | Summit Terrace</title>
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+    <script defer src="../assets/js/config.js"></script>
+    <script defer src="../assets/js/api.js"></script>
+    <script defer src="../assets/js/admin.js"></script>
+  </head>
+  <body>
+    <div class="admin-shell">
+      <aside class="admin-sidebar" id="adminSidebar"></aside>
+      <main class="admin-main">
+        <header class="admin-top">
+          <span class="admin-top-title">Bookings / Reservation details</span>
+          <div class="admin-user">
+            <span>Restaurant administrator</span
+            ><span class="avatar" aria-hidden="true">A</span>
+          </div>
+        </header>
+
+        <section class="admin-content">
+          <div class="admin-page-heading">
+            <div>
+              <div class="eyebrow">Reservation record</div>
+              <h1>Reservation <span id="detailBookingId">#—</span></h1>
+              <p>
+                Review the details carefully before saving changes or cancelling
+                this reservation.
+              </p>
+            </div>
+            <div class="admin-action-row">
+              <a class="btn btn-outline btn-small" href="bookings.html"
+                >← Back to bookings</a
+              >
+              <button
+                class="btn btn-outline btn-small"
+                id="refreshAdmin"
+                type="button"
+              >
+                ↻ Refresh
+              </button>
+            </div>
+          </div>
+
+          <div
+            class="admin-alert"
+            id="adminAlert"
+            role="status"
+            aria-live="polite"
+          ></div>
+
+          <section class="panel panel-pad">
+            <div class="panel-title">
+              <h3>Reservation information</h3>
+              <span id="detailBookingStatus"></span>
+            </div>
+
+            <p class="muted" id="bookingDetailState" aria-live="polite">
+              Loading reservation details…
+            </p>
+
+            <div class="detail-grid" style="margin-bottom: 22px">
+              <div class="detail-card">
+                <span>Booked by</span>
+                <strong id="detailUserId">—</strong>
+              </div>
+              <div class="detail-card">
+                <span>Guest contact information</span>
+                <strong
+                  >Contact details may not be available on this screen.</strong
+                >
+              </div>
+            </div>
+
+            <form id="bookingDetailsForm" hidden>
+              <div class="form-grid">
+                <div class="field full">
+                  <label for="detailTableId">Table</label>
+                  <select id="detailTableId" required></select>
+                </div>
+                <div class="field">
+                  <label for="detailStart">Start date and time</label>
+                  <input id="detailStart" type="datetime-local" required />
+                </div>
+                <div class="field">
+                  <label for="detailEnd">End date and time</label>
+                  <input id="detailEnd" type="datetime-local" required />
+                </div>
+                <div class="field">
+                  <label for="detailIndividuals">Adults</label>
+                  <input
+                    id="detailIndividuals"
+                    type="number"
+                    min="1"
+                    step="1"
+                    required
+                  />
+                </div>
+                <div class="field">
+                  <label for="detailChildren">Children</label>
+                  <input
+                    id="detailChildren"
+                    type="number"
+                    min="0"
+                    step="1"
+                    required
+                  />
+                </div>
+              </div>
+
+              <p class="api-hint" style="margin-top: 15px">
+                Changes are checked before they are saved. Payment and refund
+                records are managed separately.
+              </p>
+
+              <div class="admin-form-actions">
+                <button class="btn" type="submit" id="saveBookingButton">
+                  Save changes
+                </button>
+                <button
+                  class="btn btn-danger"
+                  type="button"
+                  id="detailCancelButton"
+                >
+                  Cancel reservation
+                </button>
+              </div>
+            </form>
+          </section>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

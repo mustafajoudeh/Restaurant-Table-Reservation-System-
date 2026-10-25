@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#526044" />
+    <meta
+      name="description"
+      content="Review and manage Summit Terrace reservations."
+    />
+    <title>Booking management | Summit Terrace</title>
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+    <script defer src="../assets/js/config.js"></script>
+    <script defer src="../assets/js/api.js"></script>
+    <script defer src="../assets/js/admin.js"></script>
+  </head>
+  <body>
+    <div class="admin-shell">
+      <aside class="admin-sidebar" id="adminSidebar"></aside>
+      <main class="admin-main">
+        <header class="admin-top">
+          <span class="admin-top-title">Bookings</span>
+          <div class="admin-user">
+            <span>Restaurant administrator</span
+            ><span class="avatar" aria-hidden="true">A</span>
+          </div>
+        </header>
+
+        <section class="admin-content">
+          <div class="admin-page-heading">
+            <div>
+              <div class="eyebrow">Reservations</div>
+              <h1>Booking management</h1>
+              <p>
+                Find reservations, review guest details where available, update
+                booking information, or cancel a reservation.
+              </p>
+            </div>
+            <button
+              class="btn btn-outline btn-small"
+              id="refreshAdmin"
+              type="button"
+            >
+              ↻ Refresh
+            </button>
+          </div>
+
+          <div
+            class="admin-alert"
+            id="adminAlert"
+            role="status"
+            aria-live="polite"
+          ></div>
+
+          <section class="panel">
+            <div class="panel-pad">
+              <div class="form-grid" style="margin-bottom: 18px">
+                <div class="field">
+                  <label for="bookingSearch">Search reservations</label>
+                  <input
+                    id="bookingSearch"
+                    type="search"
+                    placeholder="Reference, table, guest, or status"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="field">
+                  <label for="bookingStatusFilter">Filter by status</label>
+                  <select id="bookingStatusFilter">
+                    <option value="">All statuses</option>
+                    <option>Pending</option>
+                    <option>Confirmed</option>
+                    <option>Cancelled</option>
+                    <option>Completed</option>
+                    <option>No-Show</option>
+                  </select>
+                </div>
+              </div>
+
+              <div
+                class="data-table-wrap"
+                id="bookingsTable"
+                aria-live="polite"
+              >
+                <div class="loading">Loading reservations…</div>
+              </div>
+            </div>
+          </section>
+
+          <p class="muted" style="font-size: 11px; margin-top: 13px">
+            Please double-check the date, time, and party size before changing a
+            reservation. Cancel only when requested or necessary.
+          </p>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

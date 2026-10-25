@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#526044" />
+    <meta
+      name="description"
+      content="Review a payment record for Summit Terrace."
+    />
+    <title>Payment details | Summit Terrace</title>
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+    <script defer src="../assets/js/config.js"></script>
+    <script defer src="../assets/js/api.js"></script>
+    <script defer src="../assets/js/admin.js"></script>
+  </head>
+  <body>
+    <div class="admin-shell">
+      <aside class="admin-sidebar" id="adminSidebar"></aside>
+      <main class="admin-main">
+        <header class="admin-top">
+          <span class="admin-top-title">Payments / Payment details</span>
+          <div class="admin-user">
+            <span>Restaurant administrator</span
+            ><span class="avatar" aria-hidden="true">A</span>
+          </div>
+        </header>
+
+        <section class="admin-content">
+          <div class="admin-page-heading">
+            <div>
+              <div class="eyebrow">Payment record</div>
+              <h1>Payment <span id="paymentDetailId">#—</span></h1>
+              <p>
+                Review the payment details and update its status only when
+                appropriate.
+              </p>
+            </div>
+            <div class="admin-action-row">
+              <a class="btn btn-outline btn-small" href="payments.html"
+                >← Back to payments</a
+              >
+              <button
+                class="btn btn-outline btn-small"
+                id="refreshAdmin"
+                type="button"
+              >
+                ↻ Refresh
+              </button>
+            </div>
+          </div>
+
+          <div
+            class="admin-alert"
+            id="adminAlert"
+            role="status"
+            aria-live="polite"
+          ></div>
+
+          <section class="panel panel-pad">
+            <div class="panel-title">
+              <h3>Payment information</h3>
+              <span id="paymentDetailStatus"></span>
+            </div>
+
+            <p id="paymentDetailState" class="muted" aria-live="polite">
+              Loading payment details…
+            </p>
+
+            <div class="detail-grid">
+              <div class="detail-card">
+                <span>Booking reference</span
+                ><strong id="paymentDetailBooking">—</strong>
+              </div>
+              <div class="detail-card">
+                <span>Payment type</span
+                ><strong id="paymentDetailType">—</strong>
+              </div>
+              <div class="detail-card">
+                <span>Amount</span><strong id="paymentDetailAmount">—</strong>
+              </div>
+              <div class="detail-card">
+                <span>Payment method</span
+                ><strong id="paymentDetailMethod">—</strong>
+              </div>
+              <div class="detail-card" style="grid-column: 1/-1">
+                <span>Payment reference</span
+                ><strong id="paymentDetailReference">—</strong>
+              </div>
+            </div>
+
+            <div class="admin-form-actions" style="margin-top: 20px">
+              <button
+                class="btn"
+                id="paymentDetailConfirmCash"
+                type="button"
+                hidden
+              >
+                Confirm cash received
+              </button>
+              <button
+                class="btn"
+                id="paymentDetailConfirmRefund"
+                type="button"
+                hidden
+              >
+                Confirm refund processed
+              </button>
+            </div>
+
+            <p class="api-hint" style="margin-top: 16px">
+              Confirm a cash payment only after the money has been received.
+              Mark a refund complete only after it has been processed. These
+              buttons update the record and do not transfer money.
+            </p>
+          </section>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

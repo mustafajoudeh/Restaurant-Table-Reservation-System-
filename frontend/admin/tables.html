@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#526044" />
+    <meta
+      name="description"
+      content="Review Summit Terrace table capacity, fees, deposits, and status."
+    />
+    <title>Table inventory | Summit Terrace</title>
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+    <script defer src="../assets/js/config.js"></script>
+    <script defer src="../assets/js/api.js"></script>
+    <script defer src="../assets/js/admin.js"></script>
+  </head>
+  <body>
+    <div class="admin-shell">
+      <aside class="admin-sidebar" id="adminSidebar"></aside>
+      <main class="admin-main">
+        <header class="admin-top">
+          <span class="admin-top-title">Tables</span>
+          <div class="admin-user">
+            <span>Restaurant administrator</span
+            ><span class="avatar" aria-hidden="true">A</span>
+          </div>
+        </header>
+
+        <section class="admin-content">
+          <div class="admin-page-heading">
+            <div>
+              <div class="eyebrow">Restaurant setup</div>
+              <h1>Table inventory</h1>
+              <p>
+                Review seating capacity, reservation fees, deposits, and current
+                table status.
+              </p>
+            </div>
+            <button
+              class="btn btn-outline btn-small"
+              id="refreshAdmin"
+              type="button"
+            >
+              ↻ Refresh
+            </button>
+          </div>
+
+          <div
+            class="admin-alert"
+            id="adminAlert"
+            role="status"
+            aria-live="polite"
+          ></div>
+
+          <div class="metric-grid">
+            <article class="metric-card">
+              <div class="metric-label">Total tables</div>
+              <div class="metric-value" id="tableMetricTotal">—</div>
+              <div class="metric-note">Tables in the restaurant</div>
+            </article>
+            <article class="metric-card">
+              <div class="metric-label">Active tables</div>
+              <div class="metric-value" id="tableMetricActive">—</div>
+              <div class="metric-note">Available for selection</div>
+            </article>
+            <article class="metric-card">
+              <div class="metric-label">Average capacity</div>
+              <div class="metric-value" id="tableMetricCapacity">—</div>
+              <div class="metric-note">Seats per table on average</div>
+            </article>
+            <article class="metric-card">
+              <div class="metric-label">Inventory status</div>
+              <div class="metric-value" style="font-size: 20px">Current</div>
+              <div class="metric-note">Latest table information</div>
+            </article>
+          </div>
+
+          <section class="panel">
+            <div class="panel-pad">
+              <div class="panel-title"><h3>Restaurant tables</h3></div>
+              <div class="data-table-wrap" id="tablesTable" aria-live="polite">
+                <div class="loading">Loading tables…</div>
+              </div>
+            </div>
+          </section>
+
+          <div class="api-hint" style="margin-top: 16px">
+            This page provides a current view of the table inventory. To change
+            table details or availability, follow the restaurant’s approved
+            management process.
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
